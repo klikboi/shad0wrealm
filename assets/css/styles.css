@@ -1,0 +1,34 @@
+/* Center-Left Alignment for Boot */
+.boot-layout {
+    position: absolute;
+    left: 10%;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 350px;
+}
+
+.hidden { display: none; }
+
+/* Terminal Styles */
+.terminal-container {
+    padding: 40px;
+    width: 80%;
+    margin: auto;
+}
+
+h1 { color: var(--accent-color); font-family: 'Courier New', monospace; }
+
+/* Dropdown styling */
+details {
+    margin: 15px 0;
+    cursor: pointer;
+    background: rgba(0, 242, 255, 0.05);
+    padding: 10px;
+    border-left: 3px solid var(--accent-color);
+}
+
+summary { list-style: none; font-weight: bold; }
+.arrow { color: var(--accent-color); transition: 0.3s; display: inline-block; }
+details[open] .arrow { transform: rotate(90deg); }
+
+.file-desc { padding: 10px; color: #aaa; font-style: italic; }

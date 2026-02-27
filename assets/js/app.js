@@ -1,66 +1,23 @@
-  <script>
-    // ── BOOT SEQUENCE ──────────────────────
-    const splash  = document.getElementById('boot-splash');
-    const access  = document.getElementById('boot-access');
-    const barWrap = document.getElementById('boot-bar-wrap');
-    const barFill = document.getElementById('boot-bar-fill');
-    const desktop = document.getElementById('desktop');
+const bootText = "> INITIALIZING SHAD0WREALM... \n> LOADING ASSETS... \n> ACCESS GRANTED.";
+const target = document.getElementById("boot-text");
+let i = 0;
 
-    function delay(ms) { return new Promise(r => setTimeout(r, ms)); }
-
-    async function runBoot() {
-      // t=0:      ASCII + subtitle on screen
-      // t=1100ms: ACCESS GRANTED fades in
-      await delay(1100);
-      access.classList.add('show');
-
-      // t=1400ms: progress bar fires
-      await delay(300);
-      barWrap.classList.add('show');
-
-      await new Promise(r => {
-        let p = 0;
-        const iv = setInterval(() => {
-          p += Math.random() * 12 + 6;
-          if (p >= 100) {
-            p = 100;
-            barFill.style.width = '100%';
-            clearInterval(iv);
-            setTimeout(r, 100);
-          } else {
-            barFill.style.width = p + '%';
-          }
-        }, 24);
-      });
-
-      // ~2.25s: fade splash, reveal desktop
-      await delay(50);
-      splash.classList.add('fade-out');
-      desktop.classList.add('visible');
-      await delay(450);
-      splash.style.display = 'none';
+function typeWriter() {
+    if (i < bootText.length) {
+        target.innerHTML += bootText.charAt(i) === '\n' ? '<br>' : bootText.charAt(i);
+        i++;
+        setTimeout(typeWriter, 30); // Speed of typing
     }
+}
 
-    runBoot();
-
-    // ── FOLDER TOGGLE ──────────────────────
-    function toggleFolder(id) {
-      document.getElementById(id).classList.toggle('open');
-    }
-
-    // ── FILE SELECT ────────────────────────
-    function handleFile(el, appId) {
-      document.querySelectorAll('.file-entry').forEach(e => e.classList.remove('selected'));
-      el.classList.add('selected');
-      console.log('open:', appId);
-    }
-
-    // ── CLOCK ──────────────────────────────
-    function tick() {
-      const now = new Date();
-      const p = n => String(n).padStart(2,'0');
-      document.getElementById('clk').textContent = `${p(now.getHours())}:${p(now.getMinutes())}:${p(now.getSeconds())}`;
-      document.getElementById('dt').textContent  = `${p(now.getMonth()+1)}/${p(now.getDate())}/${now.getFullYear()}`;
-    }
-    tick(); setInterval(tick, 1000);
-  </script>
+// The Transition Logic
+window.onload = () => {
+    typeWriter();
+    setTimeout(() => {
+        document.getElementById("boot-screen").classList.add("hidden");
+        document.getElementById("main-terminal").classList.remove("hidden");
+        // Optional: Add a flash effect here
+        document.body.style.backgroundColor = "white";
+        setTimeout(() => document.body.style.backgroundColor = "var(--bg-color)", 50);
+    }, 2500); // 2.5 Seconds
+};
