@@ -1,0 +1,12 @@
+# Node dependencies
+node_modules/
+
+# Build output (keep styles.css tracked though)
+dist/
+
+# OS junk
+.DS_Store
+Thumbs.db
+
+# Logs
+npm-debug.log*
