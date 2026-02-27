@@ -3,26 +3,33 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>HACK_OS v1.0 // ACCESS GRANTED</title>
+  <title>SHAD0WREALM // ACCESS GRANTED</title>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link href="https://fonts.googleapis.com/css2?family=VT323&family=Share+Tech+Mono&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="css/style.css" />
 </head>
 <body>
 
-  <!-- ░░ BOOT SEQUENCE ░░ -->
+  <!-- ░░ BOOT SPLASH ░░ -->
   <div id="boot-screen">
     <div id="boot-content">
       <div id="boot-logo">
         <pre id="ascii-logo">
- ██╗  ██╗ █████╗  ██████╗██╗  ██╗       ██████╗ ███████╗
- ██║  ██║██╔══██╗██╔════╝██║ ██╔╝      ██╔═══██╗██╔════╝
- ███████║███████║██║     █████╔╝       ██║   ██║███████╗
- ██╔══██║██╔══██║██║     ██╔═██╗       ██║   ██║╚════██║
- ██║  ██║██║  ██║╚██████╗██║  ██╗      ╚██████╔╝███████║
- ╚═╝  ╚═╝╚═╝  ╚═╝ ╚═════╝╚═╝  ╚═╝      ╚═════╝ ╚══════╝
+███████╗██╗  ██╗ █████╗ ██████╗  ██████╗ ██╗    ██╗
+██╔════╝██║  ██║██╔══██╗██╔══██╗██╔═████╗██║    ██║
+███████╗███████║███████║██║  ██║██║██╔██║██║ █╗ ██║
+╚════██║██╔══██║██╔══██║██║  ██║████╔╝██║██║███╗██║
+███████║██║  ██║██║  ██║██████╔╝╚██████╔╝╚███╔███╔╝
+╚══════╝╚═╝  ╚═╝╚═╝  ╚═╝╚═════╝  ╚═════╝ ╚══╝╚══╝
+
+██████╗ ███████╗ █████╗ ██╗     ███╗   ███╗
+██╔══██╗██╔════╝██╔══██╗██║     ████╗ ████║
+██████╔╝█████╗  ███████║██║     ██╔████╔██║
+██╔══██╗██╔══╝  ██╔══██║██║     ██║╚██╔╝██║
+██║  ██║███████╗██║  ██║███████╗██║ ╚═╝ ██║
+╚═╝  ╚═╝╚══════╝╚═╝  ╚═╝╚══════╝╚═╝     ╚═╝
         </pre>
-        <div id="boot-subtitle">[ KERNEL v1.337 // CYBERSEC EDITION ]</div>
+        <div id="boot-subtitle">[ KERNEL v1.337 // KLIKBAIT EDITION ]</div>
       </div>
       <div id="boot-log"></div>
       <div id="boot-access" class="hidden">
@@ -40,80 +47,109 @@
     <canvas id="matrix-canvas"></canvas>
     <div id="scanlines"></div>
 
-    <!-- Desktop Icons -->
-    <div id="desktop-icons">
-      <div class="desk-icon" data-app="about">
-        <div class="icon-img">👾</div>
-        <span>ABOUT.exe</span>
+    <!-- ░░ FLOATING TERMINAL — WIN97 STYLE ░░ -->
+    <div id="file-manager">
+
+      <!-- Win97 Title Bar -->
+      <div id="fm-titlebar">
+        <div id="fm-title-text">://SHAD0WREALM</div>
+        <div id="fm-win-controls">
+          <button class="w97-btn" onclick="fmMinimize()" title="Minimize">_</button>
+          <button class="w97-btn" onclick="fmMaximize()" title="Restore">□</button>
+        </div>
       </div>
-      <div class="desk-icon" data-app="resume">
-        <div class="icon-img">📄</div>
-        <span>RESUME.dat</span>
+
+      <!-- Terminal Body -->
+      <div id="fm-body">
+        <div class="fm-prompt">
+          <span class="fm-purple">root</span><span class="fm-dim">@</span><span class="fm-blue">shadowrealm</span><span class="fm-dim">:</span><span class="fm-green">~/desktop</span>
+        </div>
+        <div class="fm-cmd-line"><span class="fm-purple">$</span>&nbsp;<span class="fm-green">ls</span></div>
+        <div class="fm-spacer"></div>
+
+        <div class="fm-entry" data-app="about">
+          <span class="fm-tag">[exe]</span>
+          <span class="fm-icon">👾</span>
+          <span class="fm-name">ABOUT.exe</span>
+        </div>
+        <div class="fm-entry" data-app="resume">
+          <span class="fm-tag">[dat]</span>
+          <span class="fm-icon">📄</span>
+          <span class="fm-name">RESUME.dat</span>
+        </div>
+        <div class="fm-entry" data-app="projects">
+          <span class="fm-tag">[dir]</span>
+          <span class="fm-icon">💀</span>
+          <span class="fm-name">PROJECTS/</span>
+        </div>
+        <div class="fm-entry fm-external" data-href="https://reddit.com/r/shad0wrealm">
+          <span class="fm-tag">[url]</span>
+          <span class="fm-icon">⌨️</span>
+          <span class="fm-name">r/SHAD0WREALM</span>
+        </div>
+        <div class="fm-entry" data-app="contact">
+          <span class="fm-tag">[cfg]</span>
+          <span class="fm-icon">📡</span>
+          <span class="fm-name">CONTACT.cfg</span>
+        </div>
+
+        <div class="fm-spacer"></div>
       </div>
-      <div class="desk-icon" data-app="projects">
-        <div class="icon-img">💀</div>
-        <span>PROJECTS/</span>
+
+      <!-- Win97 Status Bar / Footer -->
+      <div id="fm-footer">
+        <button id="start-btn" onclick="toggleStartMenu()" title="Start Menu">
+          <span id="start-smiley">☺</span> SHAD0WREALM
+        </button>
+        <div id="fm-footer-right">
+          <span class="fm-status-dot fm-blue">●</span>
+          <a class="fm-klikbait fm-blue" href="https://instagram.com/klikbait.tv" target="_blank">://KLIKBAIT.TV</a>
+          <span class="fm-sep">//</span>
+          <span id="clock-time" class="fm-clock fm-blue">00:00:00</span>
+          <span id="clock-date" class="fm-date">--/--/----</span>
+        </div>
       </div>
-      <div class="desk-icon" data-app="terminal">
-        <div class="icon-img">⌨️</div>
-        <span>TERMINAL.sh</span>
-      </div>
-      <div class="desk-icon" data-app="contact">
-        <div class="icon-img">📡</div>
-        <span>CONTACT.cfg</span>
-      </div>
-    </div>
+
+    </div><!-- /#file-manager -->
 
     <!-- Windows Container -->
     <div id="windows-container"></div>
 
-    <!-- Taskbar -->
-    <div id="taskbar">
-      <button id="start-btn" onclick="toggleStartMenu()">
-        <span class="start-skull">☠</span> HACK_OS
-      </button>
-      <div id="taskbar-tasks"></div>
-      <div id="taskbar-clock">
-        <div id="clock-time">00:00:00</div>
-        <div id="clock-date">--/--/----</div>
-      </div>
-    </div>
-
-    <!-- Start Menu -->
+    <!-- Start Menu (opens above terminal footer) -->
     <div id="start-menu" class="hidden">
       <div class="start-header">
-        <span class="start-skull-big">☠</span>
+        <span class="start-skull-big">☺</span>
         <div>
-          <div class="start-user">root@hackos</div>
+          <div class="start-user">root@shadowrealm</div>
           <div class="start-status">● ONLINE // SECURE</div>
         </div>
       </div>
       <div class="start-divider"></div>
       <div class="start-items">
-        <div class="start-item" onclick="openApp('about')"><span>👾</span> ABOUT.exe</div>
-        <div class="start-item" onclick="openApp('resume')"><span>📄</span> RESUME.dat</div>
-        <div class="start-item" onclick="openApp('projects')"><span>💀</span> PROJECTS/</div>
-        <div class="start-item" onclick="openApp('terminal')"><span>⌨️</span> TERMINAL.sh</div>
-        <div class="start-item" onclick="openApp('contact')"><span>📡</span> CONTACT.cfg</div>
+        <div class="start-item" onclick="openApp('about')">       <span>👾</span> ABOUT.exe</div>
+        <div class="start-item" onclick="openApp('resume')">      <span>📄</span> RESUME.dat</div>
+        <div class="start-item" onclick="openApp('projects')">    <span>💀</span> PROJECTS/</div>
+        <div class="start-item" onclick="window.open('https://reddit.com/r/shad0wrealm','_blank')"><span>⌨️</span> r/SHAD0WREALM</div>
+        <div class="start-item" onclick="openApp('contact')">     <span>📡</span> CONTACT.cfg</div>
       </div>
       <div class="start-divider"></div>
       <div class="start-item start-shutdown" onclick="triggerShutdown()"><span>⏻</span> SHUTDOWN</div>
     </div>
-  </div>
+
+  </div><!-- /#desktop -->
 
   <!-- ░░ APP TEMPLATES ░░ -->
 
-  <!-- ABOUT -->
   <template id="tpl-about">
     <div class="app-about">
       <div class="app-section">
-        <div class="app-avatar">[ &nbsp;? &nbsp;]</div>
+        <div class="app-avatar">[ ? ]</div>
         <div class="app-bio">
           <p class="app-name">&gt;&gt; WHOAMI</p>
-          <p><span class="g">NAME</span> :: <span class="w">YOUR_NAME</span></p>
-          <p><span class="g">ALIAS</span> :: <span class="w">h4ck3r_handle</span></p>
-          <p><span class="g">ROLE</span> :: <span class="w">Cybersecurity Researcher | CTF Player</span></p>
-          <p><span class="g">LOC</span> :: <span class="w">[REDACTED]</span></p>
+          <p><span class="g">NAME</span>   :: <span class="w">YOUR_NAME</span></p>
+          <p><span class="g">ALIAS</span>  :: <span class="w">klikbait</span></p>
+          <p><span class="g">ROLE</span>   :: <span class="w">Cybersecurity Researcher | CTF Player</span></p>
+          <p><span class="g">LOC</span>    :: <span class="w">[REDACTED]</span></p>
           <p><span class="g">STATUS</span> :: <span class="blink">▮ ONLINE</span></p>
         </div>
       </div>
@@ -134,21 +170,20 @@
       <div class="app-divider"></div>
       <div class="app-section-col">
         <p class="section-label">&gt;&gt; SYS_INFO</p>
-        <p><span class="g">OS</span> :: <span class="w">HACK_OS v1.0 (kernel 1.337)</span></p>
-        <p><span class="g">SHELL</span> :: <span class="w">/bin/hacksh</span></p>
-        <p><span class="g">UPTIME</span> :: <span class="w" id="uptime-counter">calculating...</span></span></p>
+        <p><span class="g">OS</span>         :: <span class="w">SHAD0WREALM v1.0 (kernel 1.337)</span></p>
+        <p><span class="g">SHELL</span>      :: <span class="w">/bin/shadowsh</span></p>
+        <p><span class="g">UPTIME</span>     :: <span class="w" id="uptime-counter">calculating...</span></p>
         <p><span class="g">THREAT_LVL</span> :: <span class="warn">⚠ MAXIMUM</span></p>
       </div>
     </div>
   </template>
 
-  <!-- RESUME -->
   <template id="tpl-resume">
     <div class="app-resume">
       <div class="resume-header">
         <p class="resume-name">YOUR_NAME</p>
         <p class="resume-title">Cybersecurity Researcher // CTF Player // Hacker</p>
-        <p class="resume-contact">📡 your@email.com &nbsp;|&nbsp; 🔗 github.com/yourhandle</p>
+        <p class="resume-contact">📡 your@email.com &nbsp;|&nbsp; 🔗 github.com/klikboi</p>
       </div>
       <div class="resume-section">
         <div class="resume-section-title">── EXPERIENCE ──────────────────────</div>
@@ -157,14 +192,14 @@
             <span class="resume-company">Company / Role</span>
             <span class="resume-date">20XX – Present</span>
           </div>
-          <p class="resume-desc">Brief description of your role and responsibilities here. Update this with your actual experience.</p>
+          <p class="resume-desc">Brief description of your role and responsibilities here.</p>
         </div>
         <div class="resume-entry">
           <div class="resume-entry-header">
             <span class="resume-company">Another Role / Company</span>
             <span class="resume-date">20XX – 20XX</span>
           </div>
-          <p class="resume-desc">Another position description here. Replace with your real experience.</p>
+          <p class="resume-desc">Another position description here.</p>
         </div>
       </div>
       <div class="resume-section">
@@ -194,7 +229,6 @@
     </div>
   </template>
 
-  <!-- PROJECTS -->
   <template id="tpl-projects">
     <div class="app-projects">
       <p class="section-label">&gt;&gt; PROJECT_DATABASE // <span class="blink">DECRYPTING...</span></p>
@@ -204,11 +238,8 @@
             <span class="project-type ctf">CTF</span>
             <span class="project-title">PROJECT_ALPHA</span>
           </div>
-          <p class="project-desc">Description of your CTF writeup or challenge solution. What vulnerability? What category?</p>
-          <div class="project-tags">
-            <span class="ptag">Web Exploit</span>
-            <span class="ptag">SQLi</span>
-          </div>
+          <p class="project-desc">Description of your CTF writeup or challenge solution.</p>
+          <div class="project-tags"><span class="ptag">Web Exploit</span><span class="ptag">SQLi</span></div>
           <a href="#" class="project-link" target="_blank">[VIEW_WRITEUP]</a>
         </div>
         <div class="project-card">
@@ -216,11 +247,8 @@
             <span class="project-type tool">TOOL</span>
             <span class="project-title">RECON_BOT</span>
           </div>
-          <p class="project-desc">Automated reconnaissance tool. Python-based OSINT aggregator for bug bounty workflow.</p>
-          <div class="project-tags">
-            <span class="ptag">Python</span>
-            <span class="ptag">OSINT</span>
-          </div>
+          <p class="project-desc">Automated OSINT aggregator for bug bounty workflow.</p>
+          <div class="project-tags"><span class="ptag">Python</span><span class="ptag">OSINT</span></div>
           <a href="#" class="project-link" target="_blank">[VIEW_SOURCE]</a>
         </div>
         <div class="project-card">
@@ -228,11 +256,8 @@
             <span class="project-type ctf">CTF</span>
             <span class="project-title">BINARY_BLUES</span>
           </div>
-          <p class="project-desc">Reverse engineering challenge writeup from [CTF_NAME]. Buffer overflow exploitation on x86.</p>
-          <div class="project-tags">
-            <span class="ptag">Rev Eng</span>
-            <span class="ptag">pwn</span>
-          </div>
+          <p class="project-desc">Reverse engineering writeup. Buffer overflow on x86.</p>
+          <div class="project-tags"><span class="ptag">Rev Eng</span><span class="ptag">pwn</span></div>
           <a href="#" class="project-link" target="_blank">[VIEW_WRITEUP]</a>
         </div>
         <div class="project-card">
@@ -240,74 +265,43 @@
             <span class="project-type research">RESEARCH</span>
             <span class="project-title">VULN_REPORT</span>
           </div>
-          <p class="project-desc">Responsible disclosure writeup or research paper. CVE or bug bounty finding description.</p>
-          <div class="project-tags">
-            <span class="ptag">Vuln Research</span>
-            <span class="ptag">CVE</span>
-          </div>
+          <p class="project-desc">Responsible disclosure writeup. CVE finding.</p>
+          <div class="project-tags"><span class="ptag">Vuln Research</span><span class="ptag">CVE</span></div>
           <a href="#" class="project-link" target="_blank">[READ_REPORT]</a>
-        </div>
-        <div class="project-card">
-          <div class="project-header">
-            <span class="project-type tool">TOOL</span>
-            <span class="project-title">NET_SCANNER</span>
-          </div>
-          <p class="project-desc">Custom network scanning utility built on Scapy. Passive fingerprinting + service enum.</p>
-          <div class="project-tags">
-            <span class="ptag">Python</span>
-            <span class="ptag">Scapy</span>
-            <span class="ptag">Networking</span>
-          </div>
-          <a href="#" class="project-link" target="_blank">[VIEW_SOURCE]</a>
-        </div>
-        <div class="project-card add-card">
-          <div class="add-card-inner">
-            <span class="add-plus">+</span>
-            <span>ADD_PROJECT</span>
-          </div>
         </div>
       </div>
     </div>
   </template>
 
-  <!-- CONTACT -->
   <template id="tpl-contact">
     <div class="app-contact">
       <p class="section-label">&gt;&gt; ESTABLISHING_CONNECTION...</p>
       <div class="contact-grid">
-        <a href="https://github.com/yourhandle" class="contact-card" target="_blank">
+        <a href="https://github.com/klikboi" class="contact-card" target="_blank">
           <div class="contact-icon">⬡</div>
           <div class="contact-info">
             <div class="contact-platform">GITHUB</div>
-            <div class="contact-handle">github.com/yourhandle</div>
+            <div class="contact-handle">github.com/klikboi</div>
           </div>
           <div class="contact-arrow">[CONNECT]</div>
         </a>
-        <a href="https://twitter.com/yourhandle" class="contact-card" target="_blank">
+        <a href="https://instagram.com/klikbait.tv" class="contact-card" target="_blank">
           <div class="contact-icon">◈</div>
           <div class="contact-info">
-            <div class="contact-platform">TWITTER / X</div>
-            <div class="contact-handle">@yourhandle</div>
+            <div class="contact-platform">INSTAGRAM // KLIKBAIT.TV</div>
+            <div class="contact-handle">instagram.com/klikbait.tv</div>
           </div>
           <div class="contact-arrow">[CONNECT]</div>
         </a>
-        <a href="https://linkedin.com/in/yourhandle" class="contact-card" target="_blank">
-          <div class="contact-icon">▣</div>
-          <div class="contact-info">
-            <div class="contact-platform">LINKEDIN</div>
-            <div class="contact-handle">linkedin.com/in/yourhandle</div>
-          </div>
-          <div class="contact-arrow">[CONNECT]</div>
-        </a>
-        <a href="https://yourctftime.org" class="contact-card" target="_blank">
+        <a href="https://reddit.com/r/shad0wrealm" class="contact-card" target="_blank">
           <div class="contact-icon">⚑</div>
           <div class="contact-info">
-            <div class="contact-platform">CTFtime</div>
-            <div class="contact-handle">your team profile</div>
+            <div class="contact-platform">REDDIT</div>
+            <div class="contact-handle">r/shad0wrealm</div>
           </div>
           <div class="contact-arrow">[CONNECT]</div>
         </a>
-        <a href="mailto:your@email.com" class="contact-card" target="_blank">
+        <a href="mailto:your@email.com" class="contact-card">
           <div class="contact-icon">◎</div>
           <div class="contact-info">
             <div class="contact-platform">EMAIL</div>
@@ -323,22 +317,8 @@
     </div>
   </template>
 
-  <!-- TERMINAL -->
-  <template id="tpl-terminal">
-    <div class="app-terminal">
-      <div class="terminal-output" id="terminal-output"></div>
-      <div class="terminal-input-row">
-        <span class="terminal-prompt">root@hackos:~$&nbsp;</span>
-        <input type="text" id="terminal-input" class="terminal-input" autocomplete="off" spellcheck="false" autofocus />
-      </div>
-    </div>
-  </template>
-
-  <!-- Scripts -->
   <script src="js/boot.js"></script>
   <script src="js/matrix.js"></script>
   <script src="js/os.js"></script>
-  <script src="js/terminal.js"></script>
-
 </body>
 </html>
