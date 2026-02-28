@@ -4,49 +4,104 @@ function delay(ms) {
   return new Promise((r) => setTimeout(r, ms));
 }
 
-// ── BOOT SEQUENCE ──────────────────────
+/* =========================================================
+   BOOT SEQUENCE — typed terminal boot (vibe A: ASCII visible)
+   ========================================================= */
 async function runBoot() {
   const splash = document.getElementById("boot-splash");
-  const access = document.getElementById("boot-access");
-  const barWrap = document.getElementById("boot-bar-wrap");
+  const typed = document.getElementById("boot-typed");
   const barFill = document.getElementById("boot-bar-fill");
   const desktop = document.getElementById("desktop");
 
-  if (!splash || !access || !barWrap || !barFill || !desktop) return;
+  if (!splash || !typed || !barFill || !desktop) return;
 
-  // t=0: ASCII + subtitle already visible
-  // t=1100ms: ACCESS GRANTED fades in
-  await delay(1100);
-  access.classList.add("show");
+  const lines = [
+    "> init: systemd starting (v252) ... [ OK ]",
+    "> kernel: loading modules ... [ OK ]",
+    "> net: link up (eth0) ... [ OK ]",
+    "> fs: mount /dev/obsidian -> /realm ... [ OK ]",
+    "> auth: handshake accepted ... [ OK ]",
+    "> ui: shad0wrealm tty attached ... [ OK ]",
+    "> access: granted.",
+  ];
 
-  // t=1400ms: progress bar fires
-  await delay(300);
-  barWrap.classList.add("show");
+  const accentTokens = ['.', ',', '!', '"', "{", "}", "[", "]", ":\\", "::", "!?"];
 
-  await new Promise((resolve) => {
-    let p = 0;
-    const iv = setInterval(() => {
-      p += Math.random() * 12 + 6;
-      if (p >= 100) {
-        p = 100;
-        barFill.style.width = "100%";
-        clearInterval(iv);
-        setTimeout(resolve, 100);
-      } else {
-        barFill.style.width = `${p}%`;
-      }
-    }, 24);
-  });
+  const appendText = (text) => {
+    const cursor = typed.querySelector(".boot-cursor");
+    if (cursor) cursor.insertAdjacentText("beforebegin", text);
+    else typed.textContent += text;
+  };
 
-  // ~2.25s: fade splash, reveal desktop
-  await delay(50);
+  const appendAccent = (token) => {
+    const cursor = typed.querySelector(".boot-cursor");
+    const span = document.createElement("span");
+    const r = Math.random();
+    span.className =
+      r < 0.55 ? "boot-accent-cyan" : r < 0.85 ? "boot-accent-purple" : "boot-accent-white";
+    span.textContent = token;
+
+    if (cursor) cursor.before(span);
+    else typed.appendChild(span);
+  };
+
+  // Setup typed area + cursor
+  typed.innerHTML = "";
+  const cursor = document.createElement("span");
+  cursor.className = "boot-cursor";
+  cursor.textContent = "▮";
+  typed.appendChild(cursor);
+
+  // Progress bar fills during typing
+  let p = 0;
+  const iv = setInterval(() => {
+    p += Math.random() * 10 + 7;
+    if (p >= 100) p = 100;
+    barFill.style.width = `${p}%`;
+    if (p >= 100) clearInterval(iv);
+  }, 55);
+
+  // Type the boot log (~2.5s)
+  const fullText = lines.join("\n") + "\n";
+  const start = performance.now();
+
+  for (let i = 0; i < fullText.length; i++) {
+    const ch = fullText[i];
+
+    // occasional colored punctuation token
+    if (i > 0 && i % 24 === 0 && Math.random() < 0.7) {
+      appendText(" ");
+      appendAccent(accentTokens[Math.floor(Math.random() * accentTokens.length)]);
+      appendText(" ");
+    }
+
+    appendText(ch);
+
+    // fast typing feel
+    const base = ch === "\n" ? 65 : ch === " " ? 10 : 16;
+    const jitter = Math.random() * 22;
+    await delay(base + jitter);
+  }
+
+  // Hold so total feels ~2.5s (snappy)
+  const elapsed = performance.now() - start;
+  const targetMs = 2500;
+  if (elapsed < targetMs) await delay(targetMs - elapsed);
+
+  // Ensure bar completes
+  barFill.style.width = "100%";
+  clearInterval(iv);
+
+  // Fade splash -> show desktop
   splash.classList.add("fade-out");
   desktop.classList.add("visible");
   await delay(450);
   splash.style.display = "none";
 }
 
-// ── FOLDER TOGGLE + FILE SELECT (no inline onclick) ─────────────
+/* =========================================================
+   FILE TREE — toggle folders + selection highlight
+   ========================================================= */
 function setupTreeInteractions() {
   const tree = document.getElementById("file-tree");
   if (!tree) return;
@@ -54,33 +109,26 @@ function setupTreeInteractions() {
   const activate = (el) => {
     if (!el) return;
 
-    // Toggle folder if it has data-toggle
     const toggleId = el.getAttribute("data-toggle");
     if (toggleId) {
       const node = document.getElementById(toggleId);
       if (node) node.classList.toggle("open");
     }
 
-    // Select file-entry if it has data-select
     const selectId = el.getAttribute("data-select");
     if (selectId) {
       document.querySelectorAll(".file-entry").forEach((n) => n.classList.remove("selected"));
-      // Note: the clickable element might be inside an <a>; add class to the closest .file-entry
       const row = el.classList.contains("file-entry") ? el : el.closest(".file-entry");
       if (row) row.classList.add("selected");
-      // Debug hook
-      // console.log("open:", selectId);
     }
   };
 
-  // Mouse clicks
   tree.addEventListener("click", (e) => {
     const target = e.target.closest("[data-toggle], [data-select]");
     if (!target) return;
     activate(target);
   });
 
-  // Keyboard accessibility: Enter / Space
   tree.addEventListener("keydown", (e) => {
     if (e.key !== "Enter" && e.key !== " ") return;
     const target = e.target.closest("[data-toggle], [data-select]");
@@ -90,7 +138,9 @@ function setupTreeInteractions() {
   });
 }
 
-// ── CLOCK ──────────────────────────────
+/* =========================================================
+   CLOCK — updates status bar time/date
+   ========================================================= */
 function startClock() {
   const clk = document.getElementById("clk");
   const dt = document.getElementById("dt");
@@ -108,7 +158,9 @@ function startClock() {
   setInterval(tick, 1000);
 }
 
-// ── INIT ───────────────────────────────
+/* =========================================================
+   INIT
+   ========================================================= */
 document.addEventListener("DOMContentLoaded", () => {
   runBoot();
   setupTreeInteractions();

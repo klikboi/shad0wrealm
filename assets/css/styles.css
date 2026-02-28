@@ -1,17 +1,26 @@
+/* =========================================================
+   SHAD0WREALM_V3 — styles.css (static / GitHub Pages ready)
+   ========================================================= */
+
 :root {
   --green: #39ff6e;
   --green-dim: #1db847;
   --green-dark: #0a2e14;
+
   --purple: #c879ff;
   --purple-dim: #8a3fbf;
   --purple-dark: #1a0a2e;
+
   --blue: #5ddfff;
   --blue-dim: #2ea8cc;
+
   --white: #d4ffd4;
+
   --font: "Share Tech Mono", monospace;
   --display: "VT323", monospace;
 }
 
+/* ---------- Base reset ---------- */
 * {
   box-sizing: border-box;
   margin: 0;
@@ -26,7 +35,7 @@ body {
   overflow: hidden;
 }
 
-/* ── BOOT SPLASH ── */
+/* ---------- Boot splash ---------- */
 #boot-splash {
   position: fixed;
   inset: 0;
@@ -35,7 +44,7 @@ body {
   flex-direction: column;
   align-items: flex-start;
   justify-content: center;
-  gap: 20px;
+  gap: 14px;
   z-index: 9999;
   padding: 0 10vw;
   transition: opacity 0.45s ease;
@@ -65,31 +74,40 @@ body {
   text-align: left;
 }
 
-#boot-access {
-  font-family: var(--display);
-  font-size: 2.8rem;
+/* Typed boot log */
+.boot-typed {
+  margin-top: 6px;
+  font-family: var(--font);
+  font-size: 0.78rem;
   color: var(--green);
-  letter-spacing: 8px;
-  text-shadow: 0 0 20px var(--green), 0 0 60px var(--green-dim);
-  opacity: 0;
-  text-align: left;
-  transition: opacity 0.3s ease;
+  white-space: pre-wrap;
+  line-height: 1.55;
+  text-shadow: 0 0 10px rgba(29, 184, 71, 0.35);
+  min-height: 9em; /* stable layout while typing */
 }
 
-#boot-access.show {
-  opacity: 1;
-  animation: pulse-glow 0.8s ease-in-out infinite alternate;
+.boot-cursor {
+  display: inline-block;
+  width: 10px;
+  color: var(--green);
+  animation: blink-cur 0.9s step-end infinite;
+}
+
+.boot-accent-cyan {
+  color: var(--blue);
+}
+.boot-accent-purple {
+  color: var(--purple);
+}
+.boot-accent-white {
+  color: var(--white);
 }
 
 #boot-bar-wrap {
   width: min(480px, 80vw);
-  opacity: 0;
+  opacity: 1;
   transition: opacity 0.2s ease;
   align-self: flex-start;
-}
-
-#boot-bar-wrap.show {
-  opacity: 1;
 }
 
 #boot-bar {
@@ -108,19 +126,7 @@ body {
   transition: width 0.03s linear;
 }
 
-/* ── DESKTOP (hidden until boot done) ── */
-#desktop {
-  display: none;
-  align-items: center;
-  justify-content: center;
-  min-height: 100vh;
-  padding: 40px 20px;
-}
-
-#desktop.visible {
-  display: flex;
-}
-
+/* Boot animations */
 @keyframes flicker {
   0%,
   100% {
@@ -140,16 +146,30 @@ body {
   }
 }
 
-@keyframes pulse-glow {
-  from {
-    text-shadow: 0 0 10px var(--green), 0 0 30px var(--green-dim);
+@keyframes blink-cur {
+  0%,
+  100% {
+    opacity: 1;
   }
-  to {
-    text-shadow: 0 0 24px var(--green), 0 0 70px var(--green);
+  50% {
+    opacity: 0;
   }
 }
 
-/* ── TERMINAL WINDOW ── */
+/* ---------- Desktop ---------- */
+#desktop {
+  display: none;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+  padding: 40px 20px;
+}
+
+#desktop.visible {
+  display: flex;
+}
+
+/* ---------- Terminal window ---------- */
 .terminal-window {
   width: 420px;
   background: #000;
@@ -160,18 +180,13 @@ body {
   box-shadow: 4px 4px 0 #000, 0 0 30px rgba(200, 121, 255, 0.2);
 }
 
-/* ── TITLE BAR ── */
+/* Title bar */
 .titlebar {
   display: flex;
   align-items: center;
   justify-content: space-between;
   padding: 5px 8px;
-  background: linear-gradient(
-    90deg,
-    var(--purple-dark),
-    #0d1a2e 60%,
-    var(--purple-dark)
-  );
+  background: linear-gradient(90deg, var(--purple-dark), #0d1a2e 60%, var(--purple-dark));
   border-bottom: 1px solid var(--purple-dim);
   user-select: none;
 }
@@ -213,7 +228,7 @@ body {
   border-right: 2px solid var(--green-dim);
 }
 
-/* ── TERMINAL BODY ── */
+/* Terminal body */
 .term-body {
   padding: 10px 12px;
   font-size: 0.78rem;
@@ -224,6 +239,7 @@ body {
   margin-bottom: 6px;
 }
 
+/* Palette helpers */
 .c-purple {
   color: var(--purple);
 }
@@ -240,12 +256,11 @@ body {
   color: var(--white);
 }
 
-/* ── FILE TREE ── */
+/* ---------- File tree ---------- */
 .tree {
   margin-top: 4px;
 }
 
-/* Folder row */
 .folder {
   display: flex;
   flex-direction: column;
@@ -290,7 +305,6 @@ body {
   letter-spacing: 0.5px;
 }
 
-/* Folder children — dropdown */
 .folder-children {
   display: none;
   padding-left: 22px;
@@ -314,7 +328,6 @@ body {
   }
 }
 
-/* File row inside folder */
 .file-entry {
   display: flex;
   align-items: center;
@@ -367,7 +380,7 @@ body {
   opacity: 0.6;
 }
 
-/* ── NESTED FILE CONTENT ── */
+/* Nested content */
 .file-content {
   border-left: 1px solid var(--green-dark) !important;
   margin-left: 9px;
@@ -409,17 +422,7 @@ body {
   animation: blink-cur 1s step-end infinite;
 }
 
-@keyframes blink-cur {
-  0%,
-  100% {
-    opacity: 1;
-  }
-  50% {
-    opacity: 0;
-  }
-}
-
-/* ── STATUS BAR ── */
+/* ---------- Status bar ---------- */
 .statusbar {
   display: flex;
   align-items: center;
@@ -510,7 +513,7 @@ body {
   white-space: nowrap;
 }
 
-/* ── SCANLINES overlay ── */
+/* ---------- Scanlines overlay (subtle cyberpunk) ---------- */
 body::after {
   content: "";
   position: fixed;

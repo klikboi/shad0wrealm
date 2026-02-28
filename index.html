@@ -5,15 +5,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>SHAD0WREALM // FILE TREE EXAMPLE</title>
 
-    <!-- Optional: Google Fonts (works on GitHub Pages).
-         If you want fully offline/self-contained later, we can self-host these fonts in /assets/fonts. -->
+    <!-- Google Fonts (works on GitHub Pages). If you want fully offline later, we can self-host. -->
     <link
       href="https://fonts.googleapis.com/css2?family=VT323&family=Share+Tech+Mono&display=swap"
       rel="stylesheet"
     />
 
     <link rel="icon" href="./assets/favicon.ico" />
-
     <link rel="stylesheet" href="./assets/css/styles.css" />
     <script src="./assets/js/app.js" defer></script>
   </head>
@@ -21,7 +19,8 @@
   <body>
     <!-- ░░ BOOT SPLASH ░░ -->
     <div id="boot-splash" aria-label="Boot splash">
-      <pre id="boot-ascii">
+      <!-- VIBE A: ASCII stays visible -->
+      <pre id="boot-ascii" aria-hidden="true">
 ███████╗██╗  ██╗ █████╗ ██████╗  ██████╗ ██╗    ██╗
 ██╔════╝██║  ██║██╔══██╗██╔══██╗██╔═████╗██║    ██║
 ███████╗███████║███████║██║  ██║██║██╔██║██║ █╗ ██║
@@ -36,8 +35,12 @@
 ██║  ██║███████╗██║  ██║███████╗██║ ╚═╝ ██║
 ╚═╝  ╚═╝╚══════╝╚═╝  ╚═╝╚══════╝╚═╝     ╚═╝</pre
       >
+
       <div id="boot-subtitle">[ KERNEL v1.337 // KLIKBAIT EDITION ]</div>
-      <div id="boot-access">► ACCESS GRANTED ◄</div>
+
+      <!-- Typed boot log (new) -->
+      <pre id="boot-typed" class="boot-typed" aria-label="Boot log"></pre>
+
       <div id="boot-bar-wrap">
         <div id="boot-bar"><div id="boot-bar-fill"></div></div>
       </div>
@@ -63,21 +66,14 @@
             ><span class="c-green">~/desktop</span>
           </div>
           <div class="prompt-line">
-            <span class="c-purple">$</span>&nbsp;<span class="c-green"
-              >ls -tree</span
-            >
+            <span class="c-purple">$</span>&nbsp;<span class="c-green">ls -tree</span>
           </div>
 
           <!-- File Tree -->
           <div class="tree" id="file-tree">
             <!-- PORTFOLIO folder -->
             <div class="folder open" id="folder-portfolio">
-              <div
-                class="folder-header"
-                role="button"
-                tabindex="0"
-                data-toggle="folder-portfolio"
-              >
+              <div class="folder-header" role="button" tabindex="0" data-toggle="folder-portfolio">
                 <span class="folder-arrow">▶</span>
                 <span class="folder-icon">📁</span>
                 <span class="folder-label c-purple">PORTFOLIO/</span>
@@ -101,48 +97,27 @@
 
                   <div class="folder-children file-content">
                     <div class="content-line">
-                      <span class="c-purple">NAME</span
-                      ><span class="c-dim"> :: </span
+                      <span class="c-purple">NAME</span><span class="c-dim"> :: </span
                       ><span class="c-white">YOUR_NAME</span>
                     </div>
                     <div class="content-line">
-                      <span class="c-purple">ALIAS</span
-                      ><span class="c-dim"> :: </span
+                      <span class="c-purple">ALIAS</span><span class="c-dim"> :: </span
                       ><span class="c-green">klikbait</span>
                     </div>
                     <div class="content-line">
-                      <span class="c-purple">ROLE</span
-                      ><span class="c-dim"> :: </span
-                      ><span class="c-white"
-                        >Cybersecurity Researcher | CTF Player</span
-                      >
+                      <span class="c-purple">ROLE</span><span class="c-dim"> :: </span
+                      ><span class="c-white">Cybersecurity Researcher | CTF Player</span>
                     </div>
                     <div class="content-line">
-                      <span class="c-purple">LOC</span
-                      ><span class="c-dim"> :: </span
+                      <span class="c-purple">LOC</span><span class="c-dim"> :: </span
                       ><span class="c-white">[REDACTED]</span>
                     </div>
                     <div class="content-line">
-                      <span class="c-purple">STATUS</span
-                      ><span class="c-dim"> :: </span
+                      <span class="c-purple">STATUS</span><span class="c-dim"> :: </span
                       ><span class="c-green blink">▮ ONLINE</span>
                     </div>
                     <div class="content-divider"></div>
-                    <div class="content-line">
-                      <span class="c-dim"
-                        >Cybersecurity researcher, CTF player, and</span
-                      >
-                    </div>
-                    <div class="content-line">
-                      <span class="c-dim"
-                        >general chaos agent. Placeholder bio text</span
-                      >
-                    </div>
-                    <div class="content-line">
-                      <span class="c-dim"
-                        >goes here. Update with your actual story.</span
-                      >
-                    </div>
+                    <div class="content-line"><span class="c-dim">Update this bio with your real story.</span></div>
                   </div>
                 </div>
 
@@ -164,18 +139,16 @@
                   <div class="folder-children file-content">
                     <div class="content-label">── EXPERIENCE ───────────────</div>
                     <div class="content-line">
-                      <span class="c-green">Company / Role</span
-                      ><span class="c-dim"> · 20XX–Present</span>
+                      <span class="c-green">Company / Role</span><span class="c-dim"> · 20XX–Present</span>
                     </div>
-                    <div class="content-line">
-                      <span class="c-dim">Brief role description placeholder.</span>
-                    </div>
+                    <div class="content-line"><span class="c-dim">Brief role description placeholder.</span></div>
+
                     <div class="content-spacer"></div>
                     <div class="content-label">── EDUCATION ────────────────</div>
                     <div class="content-line">
-                      <span class="c-green">Your Degree // Your University</span
-                      ><span class="c-dim"> · 20XX</span>
+                      <span class="c-green">Your Degree // Your University</span><span class="c-dim"> · 20XX</span>
                     </div>
+
                     <div class="content-spacer"></div>
                     <div class="content-label">── CERTS ────────────────────</div>
                     <div class="content-line">
@@ -204,25 +177,15 @@
                       <span class="c-blue">[CTF]</span><span class="c-dim"> · </span
                       ><span class="c-green">PROJECT_ALPHA</span>
                     </div>
-                    <div class="content-line sub-line">
-                      <span class="c-dim">Web exploit · SQLi writeup placeholder</span>
-                    </div>
+                    <div class="content-line sub-line"><span class="c-dim">Web exploit · SQLi writeup placeholder</span></div>
+
                     <div class="content-spacer"></div>
+
                     <div class="content-line">
                       <span class="c-green">[TOOL]</span><span class="c-dim"> · </span
                       ><span class="c-green">RECON_BOT</span>
                     </div>
-                    <div class="content-line sub-line">
-                      <span class="c-dim">Python OSINT aggregator · placeholder</span>
-                    </div>
-                    <div class="content-spacer"></div>
-                    <div class="content-line">
-                      <span class="c-blue">[CTF]</span><span class="c-dim"> · </span
-                      ><span class="c-green">BINARY_BLUES</span>
-                    </div>
-                    <div class="content-line sub-line">
-                      <span class="c-dim">Rev eng · buffer overflow · placeholder</span>
-                    </div>
+                    <div class="content-line sub-line"><span class="c-dim">Python OSINT aggregator · placeholder</span></div>
                   </div>
                 </div>
               </div>
@@ -230,12 +193,7 @@
 
             <!-- LINKS folder -->
             <div class="folder" id="folder-links">
-              <div
-                class="folder-header"
-                role="button"
-                tabindex="0"
-                data-toggle="folder-links"
-              >
+              <div class="folder-header" role="button" tabindex="0" data-toggle="folder-links">
                 <span class="folder-arrow">▶</span>
                 <span class="folder-icon">📁</span>
                 <span class="folder-label c-purple">LINKS/</span>
@@ -264,24 +222,14 @@
 
             <!-- SYSTEM folder -->
             <div class="folder" id="folder-system">
-              <div
-                class="folder-header"
-                role="button"
-                tabindex="0"
-                data-toggle="folder-system"
-              >
+              <div class="folder-header" role="button" tabindex="0" data-toggle="folder-system">
                 <span class="folder-arrow">▶</span>
                 <span class="folder-icon">📁</span>
                 <span class="folder-label c-purple">SYSTEM/</span>
               </div>
 
               <div class="folder-children">
-                <a
-                  class="file-entry"
-                  href="https://github.com/klikboi"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                >
+                <a class="file-entry" href="https://github.com/klikboi" target="_blank" rel="noopener noreferrer">
                   <span class="file-tag">[git]</span>
                   <span class="file-icon">⬡</span>
                   <span class="file-name">github.com/klikboi</span>
@@ -311,13 +259,9 @@
           <button class="start-btn" type="button">☺ SHAD0WREALM</button>
           <div class="status-right">
             <span class="pulse-dot">●</span>
-            <a
-              class="klikbait-link"
-              href="https://instagram.com/klikbait.tv"
-              target="_blank"
-              rel="noopener noreferrer"
-              >://KLIKBAIT.TV</a
-            >
+            <a class="klikbait-link" href="https://instagram.com/klikbait.tv" target="_blank" rel="noopener noreferrer">
+              ://KLIKBAIT.TV
+            </a>
             <span class="sep">//</span>
             <span class="clock" id="clk">00:00:00</span>
             <span class="date" id="dt">--/--/----</span>
